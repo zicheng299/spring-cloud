@@ -1,0 +1,21 @@
+server:
+  port: 8761
+
+#eureka配置
+eureka:
+  server:
+    enable-self-preservation: false  #是否开启自我保护机制,优先级大于instance的expiration
+    eviction-interval-timer-in-ms: 60000 #60秒内不会剔除任何实例
+  instance:
+    hostname: localhost #当前主机
+    lease-renewal-interval-in-seconds: 30 #向eureka server发送心跳的间隔
+    lease-expiration-duration-in-seconds: 90 #超过90秒eureka server没有收到eureka client的心跳,则剔除该服务
+
+  dashboard:
+    enabled: true
+    path: /  #控制台地址
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka #服务端地址
+    register-with-eureka: false #是否注册到eureka,除了provider都是false
+    fetch-registry: false #是否从Eureka抓取路径,除了consumer都是false

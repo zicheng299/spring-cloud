@@ -1,0 +1,21 @@
+server:
+  port: 8000
+
+
+
+#eureka配置
+eureka:
+  instance:
+    prefer-ip-address: true #是否将IP注册到eureka(host:192.168.x.x),默认false(host:localhost)
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}  #实例id
+    lease-renewal-interval-in-seconds: 30 #向eureka server发送心跳的间隔
+    lease-expiration-duration-in-seconds: 90 #超过90秒eureka server没有收到eureka client的心跳,则剔除该服务
+
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka #注册地址
+#      defaultZone: http://eureka-server1:8761/eureka,http://eureka-server2:8762/eureka #高可用测试(集群)
+
+spring:
+  application:
+    name: provider
