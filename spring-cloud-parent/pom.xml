@@ -10,6 +10,7 @@
     <module>eureka-server</module>
     <module>eureka-server-1</module>
     <module>eureka-server-2</module>
+    <module>nacos-provider</module>
   </modules>
   <version>1.0-SNAPSHOT</version>
   <name>spring-cloud-parent</name>
