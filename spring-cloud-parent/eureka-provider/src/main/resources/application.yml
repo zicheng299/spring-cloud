@@ -8,8 +8,8 @@ eureka:
   instance:
     prefer-ip-address: true #是否将IP注册到eureka(host:192.168.x.x),默认false(host:localhost)
     instance-id: ${spring.cloud.client.ip-address}:${server.port}  #实例id
-    lease-renewal-interval-in-seconds: 30 #向eureka server发送心跳的间隔
-    lease-expiration-duration-in-seconds: 90 #超过90秒eureka server没有收到eureka client的心跳,则剔除该服务
+#    lease-renewal-interval-in-seconds: 30 #向eureka server发送心跳的间隔
+#    lease-expiration-duration-in-seconds: 90 #超过90秒eureka server没有收到eureka client的心跳,则剔除该服务
 
   client:
     service-url:
@@ -19,3 +19,21 @@ eureka:
 spring:
   application:
     name: provider
+
+  datasource:
+    url: jdbc:mysql://47.122.37.143:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: qaz@WSX123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+# MyBatis 配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.demo.provider.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
