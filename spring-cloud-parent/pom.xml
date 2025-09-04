@@ -31,6 +31,42 @@
   </properties>
 
 
+  <!-- 依赖管理 -->
+  <dependencyManagement>
+    <dependencies>
+      <!--spring cloud 环境-->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <!--默认是jar包,此处需要指定pom包-->
+        <type>pom</type>
+        <scope>import</scope> <!-- 这里应该是 import -->
+      </dependency>
+
+      <!-- EasyExcel 版本管理 -->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>easyexcel</artifactId>
+        <version>3.3.2</version>
+      </dependency>
+
+      <!-- 其他需要统一管理的依赖 -->
+
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>3.8.1</version>
+        <scope>test</scope>
+      </dependency>
+
+    </dependencies>
+
+
+  </dependencyManagement>
+
+
 
   <dependencies>
     <!--spring cloud 环境-->
@@ -43,11 +79,7 @@
     </dependency>
 
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+
+
   </dependencies>
 </project>
