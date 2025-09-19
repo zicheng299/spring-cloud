@@ -6,12 +6,18 @@ import com.demo.provider.entity.GeneralFollow;
 import com.demo.provider.mapper.DocLibraryMapper;
 import com.demo.provider.mapper.GeneralFollowMapper;
 import com.demo.provider.service.DocLibraryService;
+import com.demo.provider.vo.DocVO;
+import com.demo.provider.vo.ParamVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.bouncycastle.operator.OperatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Wrapper;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DocLibraryServiceImpl implements DocLibraryService {
@@ -62,6 +68,14 @@ public class DocLibraryServiceImpl implements DocLibraryService {
 
         }
         return "操作成功";
+    }
+
+    @Override
+    public PageInfo<DocVO> page(ParamVO paramVO, Integer size, Integer num) {
+        PageHelper.startPage(num, size);
+        List<DocVO> docList = docLibraryMapper.selectByParam(paramVO);
+        PageInfo<DocVO> pageInfo = new PageInfo<>(docList);
+        return pageInfo;
     }
 
     private Boolean isFollow(String resourceId, String userId) {

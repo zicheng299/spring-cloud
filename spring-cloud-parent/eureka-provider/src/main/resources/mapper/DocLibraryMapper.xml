@@ -4,6 +4,23 @@
 <mapper namespace="com.demo.provider.mapper.DocLibraryMapper">
 
 
-
-
+    <select id="selectByParam" parameterType="com.demo.provider.vo.ParamVO" resultType="com.demo.provider.vo.DocVO">
+        SELECT
+        t.ID,
+        t.`NAME`,
+        CASE
+        WHEN t.TYPE = 'PROJECT' THEN '项目'
+        WHEN t.TYPE = 'COMPANY' THEN '公司'
+        ELSE t.TYPE
+        END AS TYPE,
+        t.PROJECT_ID,
+        u.DISPLAY_NAME,
+        p.project_name
+        FROM
+        t_doc_library t
+        LEFT JOIN t_user u ON t.CREATED_BY = u.ID
+        LEFT JOIN t_project p ON p.english_name = t.PROJECT_ID
+        WHERE
+        t.`NAME` LIKE CONCAT( "%", #{param.keyword}, "%" )
+    </select>
 </mapper>
